@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 class Team(models.Model):
 
     TEAM_TYPES = (
-        ('autor', _('Autor')),
+        ('author', _('Autor')),
         ('translator', _('Translator'))
     )
 
