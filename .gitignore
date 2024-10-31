@@ -164,7 +164,6 @@ pyproject.toml
 backend/media/users_avatars
 backend/media/novel_covers
 node_modules/
-
 # Logs
 logs
 *.log

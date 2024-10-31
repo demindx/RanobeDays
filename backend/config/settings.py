@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'apps.bookmarks',
     'apps.notifications',
     'apps.comments',
+    'apps.converter',
 ]
 
 MIDDLEWARE = [

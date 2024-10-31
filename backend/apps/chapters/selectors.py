@@ -23,3 +23,10 @@ def get_chapters_list(*, novel_slug) -> QuerySet[Chapter]:
 
 def get_chapter_by_id(pk: int) -> Chapter:
     return Chapter.objects.get(pk=pk)
+
+
+def get_chapter_list_by_slice(slice: tuple[int], novel_slug: str) -> QuerySet[Chapter]:
+
+    chapters = get_chapters_list(novel_slug=novel_slug)
+
+    return chapters[slice[0]:slice[1]]

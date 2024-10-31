@@ -24,6 +24,8 @@ from .selectors import (
     get_chapters_list
 )
 
+from apps.converter.utils import convert_to_format
+
 
 class ChapterDetailAPI(APIView):
     """API for getting, updating, deleting the instance of Chapter"""
