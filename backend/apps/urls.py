@@ -1,9 +1,12 @@
-from django.urls import path, include
+from django.urls import path, include, register_converter
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from apps.core.converters import SliceConverter
+
+register_converter(SliceConverter, 'slice')
 
 schema_view = get_schema_view(
     openapi.Info(

@@ -15,6 +15,9 @@ from apps.teams.apis import (
     TeamsNovelDetailAPI
 )
 
+from apps.converter.apis import DownloadChapterSliceOfNovelAPI
+
+
 teams_patterns = [
     path('', TeamsNovelAPI.as_view(), name='teams'),
     path('<int:pk>/', TeamsNovelDetailAPI.as_view(), name='teams-detail')
@@ -22,6 +25,8 @@ teams_patterns = [
 
 chapter_patterns = [
     path('', ChapterAPI.as_view(), name='chapter'),
+    path('<slice:chapters_slice>/<str:file_format>/',
+         DownloadChapterSliceOfNovelAPI.as_view(), name='download novel'),
     path('<int:pk>/', ChapterDetailAPI.as_view(),
          name='detail-chapter'),
 ]
