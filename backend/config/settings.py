@@ -218,3 +218,5 @@ DEFAULT_LIBRARY_NAMES = [
     'Прочитано',
     'Любимые'
 ]
+
+CONVERTER_CSS_FILE = BASE_DIR / 'static/file.css'

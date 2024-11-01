@@ -3,6 +3,7 @@ from pandoc.types import *
 from apps.chapters.selectors import get_chapter_list_by_slice
 from apps.chapters.models import Chapter
 from django.db.models import QuerySet
+from django.conf import settings
 
 
 def _get_doc(chapters: QuerySet[Chapter]):
@@ -25,4 +26,6 @@ def convert_to_file(chapters_slice: tuple[int], novel_slug: str, format: str = '
     chapters = get_chapter_list_by_slice(chapters_slice, novel_slug)
     data = _get_doc(chapters)
 
-    return pandoc.write(data, format=format)
+    return pandoc.write(data, format=format, options=[
+        f'--css={settings.CONVERTER_CSS_FILE}'
+    ])
