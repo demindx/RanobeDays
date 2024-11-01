@@ -1,5 +1,5 @@
 from .models import Chapter
-from django.db.models import QuerySet
+from django.db.models import QuerySet, ObjectDoesNotExist
 import django_filters
 
 
@@ -18,7 +18,12 @@ class ChapterFilter(django_filters.FilterSet):
 
 
 def get_chapters_list(*, novel_slug) -> QuerySet[Chapter]:
-    return Chapter.objects.filter(novel__slug=novel_slug)
+    result = Chapter.objects.filter(novel__slug=novel_slug)
+
+    if result.exists():
+        return result
+
+    raise ObjectDoesNotExist(f'Novel with slug - {novel_slug} does not exist')
 
 
 def get_chapter_by_id(pk: int) -> Chapter:
@@ -26,7 +31,6 @@ def get_chapter_by_id(pk: int) -> Chapter:
 
 
 def get_chapter_list_by_slice(slice: tuple[int], novel_slug: str) -> QuerySet[Chapter]:
-
     chapters = get_chapters_list(novel_slug=novel_slug)
 
     return chapters[slice[0]:slice[1]]
