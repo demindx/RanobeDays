@@ -77,7 +77,6 @@ class ChapterAPI(APIView):
     def get(self, request, slug: str) -> Response:
         queryset = get_chapters_list(novel_slug=slug)
 
-        convert_to_file((0, 2), 'new')
         data = ChapterSerializer(queryset, many=True).data
         data = get_response_data(status.HTTP_200_OK, data)
 

@@ -1,4 +1,3 @@
-
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from apps.novels.tests.factories import NovelFactory
@@ -24,13 +23,18 @@ class Command(BaseCommand):
     def create_chapters(self):
         with transaction.atomic():
             for novel in Novel.objects.all():
-                for i in range(30):
+                for i in range(50):
                     chapter = ChapterFactory(
                         novel=novel, text=self.generate_markdown_lorem_ipsum())
                     self.stdout.write(self.style.SUCCESS(
                         f'Created chapter {i} for novel {novel.title}'))
 
     def generate_markdown_lorem_ipsum(self):
-        lorem_text = lorem.text()
-        markdown_text = markdown.markdown(lorem_text)
+        # Generate 5 paragraphs of lorem ipsum text
+        text = []
+        for i in range(50):
+            text.append(lorem.paragraph())
+
+        text = ' '.join(text)
+        markdown_text = markdown.markdown(text)
         return markdown_text
