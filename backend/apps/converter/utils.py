@@ -16,8 +16,7 @@ def _get_doc(chapters: QuerySet[Chapter]):
     for chapter in chapters:
         blocks.append(Header(
             1, (f'chpater-{chapter.volume}-{chapter.number}-{chapter.title}', [], []), [Str(f'{chapter.volume}'), Str('.'), Str(f'{chapter.number}'), Space(), Str(f'{chapter.title}')]))
-        for item in pandoc.read(chapter.text)[1]:
-            blocks.append(item)
+        blocks += pandoc.read(chapter.text)[1]
 
     return Pandoc(meta, blocks)
 
