@@ -25,8 +25,6 @@ class GoogleLoginAPI(APIView):
         serializer = GoogleLoginSerializer(data=request.GET)
         serializer.is_valid(raise_exception=True)
 
-        # TODO: Make request validating in service
-
         login_object = GoogleLoginObject(**serializer.validated_data)
 
         if login_object.error is not None:

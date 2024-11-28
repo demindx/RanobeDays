@@ -6,25 +6,40 @@ from django.db.models import QuerySet
 from django.conf import settings
 
 
+def test(i: int):
+    return i
+
+
 def _get_doc(chapters: QuerySet[Chapter]):
     meta = Meta({})
 
-    meta[0]['title'] = MetaInlines([Str(chapters[0].novel.title)])
-    meta[0]['author'] = MetaInlines([Str(chapters[0].novel.creator.name)])
+    meta[0]["title"] = MetaInlines([Str(chapters[0].novel.title)])
+    meta[0]["author"] = MetaInlines([Str(chapters[0].novel.creator.name)])
 
     blocks = []
     for chapter in chapters:
-        blocks.append(Header(
-            1, (f'chpater-{chapter.volume}-{chapter.number}-{chapter.title}', [], []), [Str(f'{chapter.volume}'), Str('.'), Str(f'{chapter.number}'), Space(), Str(f'{chapter.title}')]))
+        blocks.append(
+            Header(
+                1,
+                (f"chpater-{chapter.volume}-{chapter.number}-{chapter.title}", [], []),
+                [
+                    Str(f"{chapter.volume}"),
+                    Str("."),
+                    Str(f"{chapter.number}"),
+                    Space(),
+                    Str(f"{chapter.title}"),
+                ],
+            )
+        )
         blocks += pandoc.read(chapter.text)[1]
 
     return Pandoc(meta, blocks)
 
 
-def convert_to_file(chapters_slice: tuple[int], novel_slug: str, format: str = 'epub'):
+def convert_to_file(chapters_slice: tuple[int], novel_slug: str, format: str = "epub"):
     chapters = get_chapter_list_by_slice(chapters_slice, novel_slug)
     data = _get_doc(chapters)
 
-    return pandoc.write(data, format=format, options=[
-        f'--css={settings.CONVERTER_CSS_FILE}'
-    ])
+    return pandoc.write(
+        data, format=format, options=[f"--css={settings.CONVERTER_CSS_FILE}"]
+    )

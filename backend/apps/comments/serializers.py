@@ -8,11 +8,12 @@ class CommentSerializer(serializers.Serializer):
     comment_type = serializers.ChoiceField(Comment.TYPES)
     message = serializers.CharField()
 
-    novel = serializers.CharField(source='novel.slug', required=False)
-    chapter = serializers.IntegerField(source='chapter.pk', required=False)
+    novel = serializers.CharField(source="novel.slug", required=False)
+    chapter = serializers.IntegerField(source="chapter.pk", required=False)
     parent = serializers.PrimaryKeyRelatedField(
-        queryset=Comment.objects.all(), required=False)
-    user = serializers.CharField(source='user.username')
+        queryset=Comment.objects.all(), required=False
+    )
+    user = serializers.CharField(source="user.username")
 
 
 class CommentCreateSerializer(CommentSerializer):

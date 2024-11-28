@@ -11,7 +11,7 @@ from apps.core.pagination import get_paginated_response
 from .serializers import (
     CommentSerializer,
     CommentFilterSerializer,
-    CommentCreateSerializer
+    CommentCreateSerializer,
 )
 
 from .services import create_comment
@@ -32,15 +32,14 @@ class CommentAPI(APIView):
             serializer_class=CommentSerializer,
             queryset=comments,
             view=self,
-            request=request
+            request=request,
         )
 
     def post(self, request) -> Response:
         serializer = CommentCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        comment = create_comment(CommentObject(
-            **serializer.data, user=request.user))
+        comment = create_comment(CommentObject(**serializer.data, user=request.user))
 
         data = CommentSerializer(comment).data
         data = get_response_data(status.HTTP_201_CREATED, data)
@@ -49,7 +48,10 @@ class CommentAPI(APIView):
 
 
 class CommentDetailAPI(APIView):
-    permission_classes = (IsAuthenticated, IsOwner | IsAdminUser,)
+    permission_classes = (
+        IsAuthenticated,
+        IsOwner | IsAdminUser,
+    )
 
     def delete(self, request, pk: int) -> Response:
         comment = get_comment(pk)
@@ -59,7 +61,6 @@ class CommentDetailAPI(APIView):
 
         comment.delete()
 
-        data = get_response_data(
-            status.HTTP_200_OK, data, 'Was successfully deleted')
+        data = get_response_data(status.HTTP_200_OK, data, "Was successfully deleted")
 
         return Response(data, status.HTTP_200_OK)
