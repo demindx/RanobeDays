@@ -12,7 +12,7 @@ git clone https://github.com/demindx/RanobeDays
 2. cd to directory
 
 ```bash
-cd RanobeDays
+cd RanobeDays/backend
 ```
 
 3. Run docker compose build
