@@ -11,4 +11,6 @@ ENV PATH="$POETRY_HOME/bin:$PATH"
 
 COPY . /code/
 
-RUN poetry install
+RUN apt-get update && apt-get install pandoc texlive-full -y
+
+RUN poetry config virtualenvs.create false && poetry install --no-root
