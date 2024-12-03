@@ -15,13 +15,15 @@ git clone https://github.com/demindx/RanobeDays
 cd RanobeDays/backend
 ```
 
-3. Run docker compose build
+3. create .env file and set environment variables as shown in .env.example file
+
+4. Run docker compose build
 
 ```bash
 docker compose build
 ```
 
-4. Run backend server
+5. Run backend server
 
 ```bash
 docker compose up
