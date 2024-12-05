@@ -17,13 +17,19 @@ cd RanobeDays/backend
 
 3. create .env file and set environment variables as shown in .env.example file
 
-4. Run docker compose build
+4. generate secret key and copy it to .env file
+
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+5. Run docker compose build
 
 ```bash
 docker compose build
 ```
 
-5. Run backend server
+6. Run backend server
 
 ```bash
 docker compose up
