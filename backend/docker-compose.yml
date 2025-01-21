@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   db:
     image: postgres
@@ -9,7 +7,6 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-  
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000

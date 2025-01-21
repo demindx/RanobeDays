@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     "django_filters",
     # authentication
     "rest_framework.authtoken",
-    # documentation swagger
+    # documentation
     "drf_yasg",
     # local apps
     "apps.core",

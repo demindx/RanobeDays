@@ -83,6 +83,7 @@ class GoogleLoginRegisterService:
         )
 
     # TODO: think about genereating pass for users which are registering via oauth2
+    # Random maybe
     def _generate_password(self) -> str:
         string_to_hash = self._user_info["sub"] + self._user_info["email"]
         return hashlib.sha256(string_to_hash.encode("utf-8")).hexdigest()

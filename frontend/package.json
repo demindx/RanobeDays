@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@heroicons/vue": "^2.2.0",
     "vue": "^3.4.29"
   },
   "devDependencies": {
@@ -18,9 +19,12 @@
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@vitejs/plugin-vue": "^5.0.5",
+    "autoprefixer": "^10.4.20",
     "oh-vue-icons": "1.0.0-rc3",
+    "postcss": "^8.5.1",
     "sass": "^1.79.5",
     "sass-loader": "^16.0.2",
+    "tailwindcss": "^3.4.17",
     "vite": "^5.3.1",
     "vite-svg-loader": "^5.1.0",
     "vue-router": "^4.5.0",
