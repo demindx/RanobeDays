@@ -1,8 +1,19 @@
 from .models import Tag, Genre, Language, Country
+import django_filters
 
 
-def tag_list() -> list[Tag]:
-    return Tag.objects.all()
+class TagFilter(django_filters.FilterSet):
+    ids = django_filters.BaseInFilter(field_name='pk', lookup_expr='in')
+
+
+def tag_list(*, filters = None) -> list[Tag]:
+    filters = {} or filters
+    print(filters)
+    qs = Tag.objects.all()
+
+    filter = TagFilter(filters, qs)
+
+    return filter.qs
 
 
 def get_tag(pk: int) -> Tag:

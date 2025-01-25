@@ -20,3 +20,10 @@ class TagSerializer(serializers.Serializer):
 class GenreSerializer(serializers.Serializer):
     id = serializers.ReadOnlyField()
     name = serializers.CharField(required=False)
+
+
+class TagFilterSerializer(serializers.Serializer):
+    ids = serializers.ListField(
+        child = serializers.IntegerField(min_value=1),
+        required = False
+    )

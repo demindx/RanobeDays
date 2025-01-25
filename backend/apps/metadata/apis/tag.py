@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 
 from apps.metadata.types import TagObject
-from apps.metadata.serializers import TagSerializer
+from apps.metadata.serializers import TagSerializer, TagFilterSerializer
 from apps.core.utils import get_response_data
 from apps.core.permissions import ReadOnly
 
@@ -27,7 +27,11 @@ class TagAPI(APIView):
     permission_classes = (IsAuthenticated | ReadOnly,)
 
     def get(self, request) -> Response:
-        queryset = tag_list()
+        filter_serializer = TagFilterSerializer(data=request.query_params)
+        filter_serializer.is_valid(raise_exception=True)
+        print(filter_serializer.validated_data)
+
+        queryset = tag_list(filters=filter_serializer.validated_data)
 
         data = TagSerializer(queryset, many=True).data
         data = get_response_data(status.HTTP_200_OK, data)
